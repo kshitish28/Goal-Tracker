@@ -15,6 +15,7 @@ function App() {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setGoals(savedGoals);
     setTheme(savedTheme);
+    document.body.classList.add(savedTheme); // Add the saved theme class to body
   }, []);
 
   // Save goals and theme to localStorage whenever goals or theme change
@@ -23,6 +24,8 @@ function App() {
       localStorage.setItem('goals', JSON.stringify(goals));
     }
     localStorage.setItem('theme', theme);
+    document.body.classList.remove(theme === 'light' ? 'dark' : 'light'); // Remove the previous theme class
+    document.body.classList.add(theme); // Add the new theme class
   }, [goals, theme]);
 
   const handleGoalNameChange = (e) => {
@@ -70,7 +73,7 @@ function App() {
   };
 
   return (
-    <div className={`App ${theme}`}>
+    <div className={`App`}>
       <h1>Savings Goal Tracker</h1>
       
       <div>
@@ -119,9 +122,9 @@ function App() {
             return (
               <div key={goal.id} className="goal">
                 <h3>{goal.name}</h3>
-                <p>Total Goal: ₹{goal.goalAmount}</p>
-                <p>Current Savings: ₹{goal.currentSavings}</p>
-                <p>Remaining Amount: ₹{remainingAmount}</p>
+                <p>Total Goal: ₹{goal.goalAmount.toFixed(2)}</p>
+                <p>Current Savings: ₹{goal.currentSavings.toFixed(2)}</p>
+                <p>Remaining Amount: ₹{remainingAmount.toFixed(2)}</p>
                 <p>Progress: {progressPercentage.toFixed(2)}%</p>
                 <div className="progress-bar">
                   <div className="progress" style={{ width: `${progressPercentage}%` }}></div>
