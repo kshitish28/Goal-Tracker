@@ -2,30 +2,27 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
-  // State for the list of goals and theme
   const [goals, setGoals] = useState([]);
   const [goalName, setGoalName] = useState('');
   const [goalAmount, setGoalAmount] = useState('');
   const [currentSavings, setCurrentSavings] = useState('');
-  const [theme, setTheme] = useState('light'); // Theme state (light or dark)
+  const [theme, setTheme] = useState('light');
+  const [isEditing, setIsEditing] = useState(false); // To track if we're editing a goal
+  const [editGoalId, setEditGoalId] = useState(null); // Store the goal ID being edited
 
-  // Load goals and theme from localStorage on initial render
+  // Load goals and theme from localStorage
   useEffect(() => {
     const savedGoals = JSON.parse(localStorage.getItem('goals')) || [];
     const savedTheme = localStorage.getItem('theme') || 'light';
     setGoals(savedGoals);
     setTheme(savedTheme);
-    document.body.classList.add(savedTheme); // Add the saved theme class to body
   }, []);
 
-  // Save goals and theme to localStorage whenever goals or theme change
   useEffect(() => {
     if (goals.length > 0) {
       localStorage.setItem('goals', JSON.stringify(goals));
     }
     localStorage.setItem('theme', theme);
-    document.body.classList.remove(theme === 'light' ? 'dark' : 'light'); // Remove the previous theme class
-    document.body.classList.add(theme); // Add the new theme class
   }, [goals, theme]);
 
   const handleGoalNameChange = (e) => {
@@ -63,6 +60,36 @@ function App() {
     }
   };
 
+  const editGoal = (goal) => {
+    setIsEditing(true);
+    setGoalName(goal.name);
+    setGoalAmount(goal.goalAmount.toString());
+    setCurrentSavings(goal.currentSavings.toString());
+    setEditGoalId(goal.id); // Set the goal ID to be edited
+  };
+
+  const updateGoal = () => {
+    if (goalName && goalAmount && currentSavings) {
+      const updatedGoals = goals.map((goal) =>
+        goal.id === editGoalId
+          ? {
+              ...goal,
+              name: goalName,
+              goalAmount: parseFloat(goalAmount),
+              currentSavings: parseFloat(currentSavings),
+            }
+          : goal
+      );
+      setGoals(updatedGoals);
+      setIsEditing(false); // Reset edit mode
+      setGoalName('');
+      setGoalAmount('');
+      setCurrentSavings('');
+    } else {
+      alert('Please fill all fields');
+    }
+  };
+
   const resetGoals = () => {
     setGoals([]);
     localStorage.removeItem('goals');
@@ -73,16 +100,16 @@ function App() {
   };
 
   return (
-    <div className={`App`}>
+    <div className={`App ${theme}`}>
       <h1>Savings Goal Tracker</h1>
-      
+
       <div>
         <label>
           Goal Name:
-          <input 
-            type="text" 
-            value={goalName} 
-            onChange={handleGoalNameChange} 
+          <input
+            type="text"
+            value={goalName}
+            onChange={handleGoalNameChange}
             placeholder="Enter goal name"
           />
         </label>
@@ -91,10 +118,10 @@ function App() {
       <div>
         <label>
           Total Goal Amount:
-          <input 
-            type="number" 
-            value={goalAmount} 
-            onChange={handleGoalAmountChange} 
+          <input
+            type="number"
+            value={goalAmount}
+            onChange={handleGoalAmountChange}
             placeholder="Enter goal amount"
           />
         </label>
@@ -103,16 +130,20 @@ function App() {
       <div>
         <label>
           Current Savings:
-          <input 
-            type="number" 
-            value={currentSavings} 
-            onChange={handleCurrentSavingsChange} 
+          <input
+            type="number"
+            value={currentSavings}
+            onChange={handleCurrentSavingsChange}
             placeholder="Enter current savings"
           />
         </label>
       </div>
 
-      <button onClick={addGoal}>Add Goal</button>
+      {isEditing ? (
+        <button onClick={updateGoal}>Update Goal</button>
+      ) : (
+        <button onClick={addGoal}>Add Goal</button>
+      )}
 
       <div className="goal-list">
         <h2>Your Goals</h2>
@@ -122,13 +153,14 @@ function App() {
             return (
               <div key={goal.id} className="goal">
                 <h3>{goal.name}</h3>
-                <p>Total Goal: ₹{goal.goalAmount.toFixed(2)}</p>
-                <p>Current Savings: ₹{goal.currentSavings.toFixed(2)}</p>
+                <p>Total Goal: ₹{goal.goalAmount}</p>
+                <p>Current Savings: ₹{goal.currentSavings}</p>
                 <p>Remaining Amount: ₹{remainingAmount.toFixed(2)}</p>
                 <p>Progress: {progressPercentage.toFixed(2)}%</p>
                 <div className="progress-bar">
                   <div className="progress" style={{ width: `${progressPercentage}%` }}></div>
                 </div>
+                <button onClick={() => editGoal(goal)}>Edit</button>
               </div>
             );
           })
