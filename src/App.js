@@ -64,7 +64,7 @@ function App() {
 
       {remaining !== null && (
         <div>
-          <h2>Remaining Amount: ${remaining}</h2>
+          <h2>Remaining Amount: ₹ {remaining}</h2>
           <h3>Progress: {progress.toFixed(2)}%</h3>
           <div className="progress-bar">
             <div className="progress" style={{ width: `${progress}%` }}></div>
