@@ -23,6 +23,20 @@ function App() {
       localStorage.setItem('goals', JSON.stringify(goals));
     }
     localStorage.setItem('theme', theme);
+
+    // Dynamically update background image when theme changes
+    if (theme === 'light') {
+      document.body.style.backgroundImage =
+        "url('https://static.vecteezy.com/system/resources/thumbnails/038/973/288/small_2x/ai-generated-spring-meadow-with-big-tree-with-fresh-green-leaves-photo.jpg')";
+    } else {
+      document.body.style.backgroundImage =
+        "url('https://wallpapers.com/images/hd/dark-nature-1920-x-1080-background-lqtolhf1sfr3ve5s.jpg')";
+    }
+
+    // Ensure the background image covers the entire body
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundRepeat = 'no-repeat';
   }, [goals, theme]);
 
   const handleGoalNameChange = (e) => {
