@@ -1,122 +1,437 @@
-/* Light Mode Styles (default) */
+/* General Body Styles */
 body {
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/038/973/288/small_2x/ai-generated-spring-meadow-with-big-tree-with-fresh-green-leaves-photo.jpg'); /* Light theme background */
+  background-color: #f4f7f6;
+  color: #333;
+  transition: all 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* App Container */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Ensure content starts from the top */
+  padding: 40px;
+  box-sizing: border-box;
+  transition: background-color 0.3s, color 0.3s;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  transition: all 0.3s ease;
+  max-width: 600px; /* Limit the width of the content */
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px; /* Rounded corners for a more elegant look */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow for some depth */
+}
+
+/* Light and Dark Theme Styles */
+.App.light {
+  background-color: #f4f7f65e;
   color: #333;
 }
 
-.App {
+.App.dark {
+  background-color: #22222282;;
+  color: #f1f1f1;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;;
+  font-weight: 600;
   text-align: center;
-  padding: 40px;
-  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for content */
-  color: #333;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 50px auto;
-  border: 1px solid #ddd;
 }
 
-input {
-  padding: 10px;
-  margin: 10px;
-  width: 250px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
-  color: #333;
-}
-
+/* Button Styling */
 button {
-  padding: 10px 20px;
-  margin: 10px;
-  cursor: pointer;
   background-color: #4CAF50;
   color: white;
+  font-size: 16px;
+  padding: 12px 24px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button.secondary {
+  background-color: #008CBA;
+}
+
+button.secondary:hover {
+  background-color: #007B9E;
+}
+
+button.danger {
+  background-color: #f44336;
+}
+
+button.danger:hover {
+  background-color: #e53935;
+}
+
+button.logout {
+  background-color: #FF5722;
+}
+
+button.logout:hover {
+  background-color: #F44336;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"] {
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 2px solid #ddd;
+  width: 100%;
+  max-width: 400px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  margin-left: 55px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus {
+  border-color: #4CAF50;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  margin-bottom: 15px;
+}
+
+/* Goal List and Goal Styling */
+.goal-list {
+  width: 100%;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 30px;
+  margin-top: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.goal {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.goal:hover {
+  transform: translateY(-5px);
+}
+
+.goal h3 {
+  font-size: 24px;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.goal p {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.progress-bar {
+  height: 12px;
+  background-color: #ddd;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+.progress {
+  height: 100%;
+  background-color: #4CAF50;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+/* No Goals Message */
+.no-goals-message {
+  font-size: 18px;
+  color: #777;
+  margin-top: 20px;
+}
+
+/* Register/Login Form Styling */
+.register-login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ensure it fills the available width */
+}
+
+.register-login-container h2 {
+  font-size: 28px;
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+
+.register-login-container input {
+  font-size: 16px;
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 2px solid #ddd;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.register-login-container input:focus {
+  border-color: #4CAF50;
+}
+
+.register-login-container button {
+  width: 100%; /* Make buttons take full width */
+  max-width: 400px; /* Ensure they don’t stretch too wide */
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 15px; /* Add some space between buttons */
+}
+
+.register-login-container button.secondary {
+  background-color: #008CBA;
+}
+
+.register-login-container button.secondary:hover {
+  background-color: #007B9E;
+}
+
+.register-login-container button:active {
+  transform: translateY(0);
+}
+
+.message {
+  font-size: 16px;
+  color: red;
+  margin-top: 10px;
+}
+
+/* General Button Styles (This will be used for both Register and Login buttons) */
+button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-left: 55px;
+}
+
+button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button.secondary {
+  background-color: #008CBA;
+}
+
+button.secondary:hover {
+  background-color: #007B9E;
+}
+
+/* Goal Form Styling */
+.goal-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.goal-form-container label {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.goal-form-container input {
+  font-size: 16px;
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  border-radius: 6px;
+  border: 2px solid #ddd;
+  margin-bottom: 15px;
+  transition: border-color 0.3s ease;
+}
+
+.goal-form-container input:focus {
+  border-color: #4CAF50;
+}
+
+button.add-goal,
+button.update-goal {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+button.add-goal {
+  background-color: #4CAF50;
+}
+
+button.add-goal:hover {
+  background-color: #45a049;
+}
+
+button.update-goal {
+  background-color: #008CBA;
+}
+
+button.update-goal:hover {
+  background-color: #007B9E;
+}
+
+/* Goal List Styling */
+.goal-list {
+  margin-top: 30px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.goal {
+  border: 2px solid #ddd;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.goal h3 {
+  font-size: 22px;
+  color: #333;
+}
+
+.goal p {
+  font-size: 16px;
+  color: #666;
 }
 
 .progress-bar {
   width: 100%;
   background-color: #f3f3f3;
   border-radius: 5px;
-  margin-top: 20px;
-  height: 20px;
+  margin-top: 10px;
+  height: 10px;
+  overflow: hidden;
 }
 
 .progress {
   height: 100%;
   background-color: #4CAF50;
-  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+
+/* Theme and Reset Buttons */
+button.theme-toggle,
+button.reset-button,
+button.logout-button {
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  font-size: 16px;
+  margin-top: 20px;
 }
 
 button.theme-toggle {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #333;
-  color: white;
-  border: 1px solid #444;
-  border-radius: 5px;
+  background-color: #FFA500;
 }
 
 button.theme-toggle:hover {
-  background-color: #555;
+  background-color: #FF8C00;
 }
 
-/* Dark Mode Styles */
-body.dark {
-  background-image: url('https://wallpapers.com/images/hd/dark-nature-1920-x-1080-background-lqtolhf1sfr3ve5s.jpg'); /* Dark theme background */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #fff;
+button.reset-button {
+  background-color: #f44336;
 }
 
-.App.dark {
-  background-color: rgba(30, 30, 30, 0.8); /* Semi-transparent background for content */
-  color: #fff;
-  border: 1px solid #444;
-  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+button.reset-button:hover {
+  background-color: #d32f2f;
 }
 
-.App.dark input {
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #444;
+button.logout-button {
+  background-color: #f44336;
 }
 
-.App.dark button {
-  background-color: #333;
-  border: 1px solid #555;
+button.logout-button:hover {
+  background-color: #d32f2f;
 }
 
-.App.dark .progress-bar {
-  background-color: #444;
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .App {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .goal-list {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .goal {
+    padding: 12px;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"] {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
 }
 
-.App.dark .progress {
-  background-color: #4CAF50;
-}
-
-button.theme-toggle {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #333;
-  color: white;
-  border: 1px solid #444;
-  border-radius: 5px;
-}
-
-button.theme-toggle:hover {
-  background-color: #555;
-}
